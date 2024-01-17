@@ -1,0 +1,43 @@
+const dbConfig = require('../config/dbConfig.js');
+
+const {Sequelize, DataTypes} = require('sequelize');
+
+const sequelize = new Sequelize(
+    dbConfig.DB,
+    dbConfig.USER,
+    dbConfig.PASSWORD, {
+        host: dbConfig.HOST,
+        dialect: dbConfig.dialect,
+        operatorsAliases: false,
+    }
+)
+
+sequelize.authenticate()
+.then(() => {
+    console.log('Database connected..')
+})
+.catch(err => {
+    console.log('Error'+ err)
+})
+
+const db = {}
+
+db.Sequelize = Sequelize
+db.sequelize = sequelize
+
+db.users = require('./userModel.js')(sequelize, DataTypes)
+db.blogs = require('./blogModel.js')(sequelize, DataTypes)
+db.comments = require('./commentModel.js')(sequelize, DataTypes)
+
+db.sequelize.sync({ force: false })
+.then(() => {
+    console.log('yes re-sync done!')
+})
+
+//one to many
+// db.blogs.hasMany(db.comments, {
+//     foreignKey: 'blog_id'
+// })
+// db.comments.belongsTo(db.blogs)
+
+module.exports = db

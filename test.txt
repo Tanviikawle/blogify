@@ -1,0 +1,24 @@
+
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY ,
+    user_email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    user_pwd VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Blogs ( 
+    blog_id INT AUTO_INCREMENT PRIMARY KEY, 
+    blog_title VARCHAR(255), 
+    blog_body VARCHAR(255), 
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) 
+);
+
+CREATE TABLE Comments ( 
+    comment_id INT AUTO_INCREMENT PRIMARY KEY, 
+    comment_body VARCHAR(255), 
+    user_id INT, 
+    blog_id INT, 
+    FOREIGN KEY (user_id) REFERENCES Users(user_id), 
+    FOREIGN KEY (blog_id) REFERENCES Blogs(blog_id) 
+);

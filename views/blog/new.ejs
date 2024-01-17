@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate')%>
+
+<h1>Create new blog</h1>
+
+<form action="/blogs" method="post" novalidate class="validated-form">
+    <div class="mb-3">
+        <label for="blog_title" class="form-label">Blog Title:</label>
+        <input type="text" class="form-control" id="blog_title" name="blog[title]">
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="blog_content" class="form-label">Type your blog here: </label>
+        <textarea class="form-control" id="blog_content" rows="5" name="blog[content]"></textarea>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Create Blog</button>
+      </div>
+</form>

@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container-md" style="width: 100vh;">
+    <!-- <%console.log(blog)%> -->
+    <div class="mb-3">
+        <h1> <%= blog.dataValues.title %></h1>
+    </div>
+    <div class="container-md">
+        <p><%= blog.dataValues.content %></p>
+    </div>
+    <div class="mb-3">
+        <a href="<%= blog.id %>/update" class="card-link btn btn-primary">Edit blog</a>
+    </div>
+    <div class="mb-3">
+        <form class="d-inline" action="/blogs/<%=blog.id%>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>

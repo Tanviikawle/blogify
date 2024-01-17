@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate')%>
+
+<h1>Update blog</h1>
+
+<form action="/blogs/<%=blog.id%>?_method=PUT" method="post" novalidate class="validated-form">
+    <div class="mb-3">
+        <label for="blog_title" class="form-label">Blog Title:</label>
+        <input type="text" class="form-control" id="blog_title" name="blog[title]" value="<%= blog.dataValues.title%>">
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="blog_content" class="form-label">Type your blog here: </label>
+        <textarea class="form-control" id="blog_content" rows="5" name="blog[content]" value="<%=blog.dataValues.content%>"><%=blog.dataValues.content%></textarea>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Update Blog</button>
+      </div>
+</form>
