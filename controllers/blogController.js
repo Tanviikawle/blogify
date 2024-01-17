@@ -5,7 +5,8 @@ const Blog = db.blogs
 // const Review = db.reviews
 
 const renderCreateNewBlog = (req,res)=>{
-    res.render('blog/new');
+    const cookies = req.cookies;
+    res.render('blog/new',{cookies});
 }
 
 // 1. create blog
@@ -21,23 +22,27 @@ const createBlog = async (req, res) => {
 // 2. get all blogs
 
 const getAllBlogs = async (req, res) => {
+    const cookies = req.cookies;
     const blogs = await Blog.findAll({})
+    console.log(req.cookies)
     // console.log(blogs)
-    res.render('blog/index',{blogs})
+    res.render('blog/index',{blogs,cookies})
 }
 
 // 3. get single blog
 
 const getOneBlog = async (req, res) => {
+    const cookies = req.cookies;
     const { id } = req.params
     const blog = await Blog.findOne({ where: { id: id }})
-    res.render('blog/show',{blog})
+    res.render('blog/show',{blog,cookies})
 }
 
 const renderUpdateBlog = async(req,res)=>{
+    const cookies = req.cookies;
     const { id } = req.params
     const blog = await Blog.findOne({ where: { id: id }})
-    res.render('blog/update',{blog});
+    res.render('blog/update',{blog,cookies});
 }
 
 // 4. update blog

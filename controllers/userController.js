@@ -7,11 +7,13 @@ const jwt = require('jsonwebtoken');
 require('../config/passport')
 
 const renderLogin = (req,res)=>{
-    res.render('users/login');
+    const cookies = req.cookies;
+    res.render('users/login',{cookies});
 }
 
 const renderRegister = (req,res)=>{
-    res.render('users/register');
+    const cookies = req.cookies;
+    res.render('users/register',{cookies});
 }
 
 const register =  async(req, res) => {
@@ -21,7 +23,7 @@ const register =  async(req, res) => {
         password: hashSync(req.body.password, 10)
     }
     const user = await User.create(newUser)
-    res.redirect(`/blogs`);
+    res.redirect(`/login`);
 }
 
 const login = async(req, res) => {
