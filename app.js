@@ -4,6 +4,7 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const blogController = require('./controllers/blogController');
 const validateBlog = require('./middleware');
+const ExpressError = require('./utils/ExpressError');
 
 const app = express();
 
@@ -17,12 +18,24 @@ app.set('views',path.join(__dirname,'views'))
 
 
 app.get('/blogs', blogController.getAllBlogs)
-app.get('/blogs/:id',blogController.getOneBlog)
 app.get('/new',blogController.renderCreateNewBlog)
+app.get('/blogs/:id',blogController.getOneBlog)
 app.post('/blogs',validateBlog,blogController.createBlog)
 app.get('/blogs/:id/update', blogController.renderUpdateBlog)
 app.put('/blogs/:id',validateBlog,blogController.updateBlog)
 app.delete('/blogs/:id',blogController.deleteBlog)
+
+app.all('*',(req,res,next)=>{
+    next(new ExpressError('Page Not Found',404))
+})
+
+//global error handeling middlewear.
+app.use((err,req,res,next)=>{
+    const {statusCode = 500} = err;
+    if (!err.message) err.message = 'Oh No, Something wenr wrong!'
+    res.status(statusCode).render('error',{err});
+    // res.send('Oh boy, Something went wrong!!');
+})
 
 
 

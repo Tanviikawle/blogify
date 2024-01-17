@@ -5,14 +5,14 @@
 <form action="/blogs" method="post" novalidate class="validated-form">
     <div class="mb-3">
         <label for="blog_title" class="form-label">Blog Title:</label>
-        <input type="text" class="form-control" id="blog_title" name="blog[title]">
+        <input type="text" class="form-control" id="blog_title" name="blog[title]" required>
         <div class="valid-feedback">
           Looks good!
         </div>
       </div>
       <div class="mb-3">
         <label for="blog_content" class="form-label">Type your blog here: </label>
-        <textarea class="form-control" id="blog_content" rows="5" name="blog[content]"></textarea>
+        <textarea class="form-control" id="blog_content" rows="5" name="blog[content]" required></textarea>
         <div class="valid-feedback">
           Looks good!
         </div>
