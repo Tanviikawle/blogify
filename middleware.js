@@ -11,12 +11,24 @@ const validateBlog = (req,res,next) => {
     }
 }
 
-module.exports = validateBlog
-
-
-module.exports.isLoggedIn = (req,res,next)=>{
-    if(!req.isAuthenticated()){
-        return  res.redirect('/login');
+const isLoggedIn = (req,res,next)=>{
+    const token = req.cookies.savedToken;
+    if(!token){
+        res.redirect('/login');
     }
     next();
+}
+
+// const isAuthor = async(req,res,next)=>{
+//     const { id } = req.params;
+//     const blog = await Blog.findOne({ where: { id: id }})
+//     if(!blog.author.equals(req.user._id)){
+//         return res.redirect(`/cafes/${id}`);
+//     }
+//     next();
+// }
+
+module.exports = {
+    validateBlog,
+    isLoggedIn
 }

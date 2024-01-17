@@ -1,10 +1,10 @@
 // create main Model
 const db = require('../models')
 const User = db.users;
-
 const { hashSync, compareSync } = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-// require('../config/passport')
+require('../config/passport')
 
 const renderLogin = (req,res)=>{
     res.render('users/login');
@@ -34,17 +34,31 @@ const login = async(req, res) => {
     if (!compareSync(req.body.password, user.password)) {
         return res.redirect('/login');
     }
-    // const payload = {
-    //     username: user.username,
-    //     id: user._id
-    // }
-    // const token = jwt.sign(payload, "Random string", { expiresIn: "1d" })
-    return res.redirect('/blogs');
+    const payload = {
+            username: user.username,
+            id: user.id
+        }
+        const token = jwt.sign(payload, "Random string", { expiresIn: "1d" })
+        const newToken = 'Bearer ' + token;
+        return res.cookie('savedToken',newToken,
+        {httpOnly:true,
+        expires: Date.now()+1000*60*60*24*7,
+        maxAge: 1000*60*60*24*7,}).redirect('/blogs');
 }
+
+const logout = (req,res)=>{
+    return res.clearCookie('savedToken')
+    .redirect('/blogs')
+}
+
+
+
+
 
 module.exports={
     renderLogin,
     renderRegister,
     register,
-    login
+    login,
+    logout
 }
