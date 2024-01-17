@@ -12,3 +12,11 @@ const validateBlog = (req,res,next) => {
 }
 
 module.exports = validateBlog
+
+
+module.exports.isLoggedIn = (req,res,next)=>{
+    if(!req.isAuthenticated()){
+        return  res.redirect('/login');
+    }
+    next();
+}

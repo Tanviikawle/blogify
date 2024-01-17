@@ -3,8 +3,10 @@ const methodOverride = require('method-override');
 const path = require('path');
 const ejsMate = require('ejs-mate');
 const blogController = require('./controllers/blogController');
+const userController = require('./controllers/userController');
 const validateBlog = require('./middleware');
 const ExpressError = require('./utils/ExpressError');
+const passport = require('passport');
 
 const app = express();
 
@@ -16,6 +18,7 @@ app.engine('ejs',ejsMate)
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'))
 
+app.use(passport.initialize());
 
 app.get('/blogs', blogController.getAllBlogs)
 app.get('/new',blogController.renderCreateNewBlog)
@@ -24,6 +27,13 @@ app.post('/blogs',validateBlog,blogController.createBlog)
 app.get('/blogs/:id/update', blogController.renderUpdateBlog)
 app.put('/blogs/:id',validateBlog,blogController.updateBlog)
 app.delete('/blogs/:id',blogController.deleteBlog)
+
+//user routes
+
+app.get('/login',userController.renderLogin);
+app.get('/register',userController.renderRegister);
+app.post('/register',userController.register);
+app.post('/login',userController.login)
 
 app.all('*',(req,res,next)=>{
     next(new ExpressError('Page Not Found',404))
@@ -36,8 +46,6 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render('error',{err});
     // res.send('Oh boy, Something went wrong!!');
 })
-
-
 
 app.listen(3000,()=>{
     console.log('Listening on port 3000!');
