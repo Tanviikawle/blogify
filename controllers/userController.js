@@ -37,7 +37,6 @@ const login = async(req, res) => {
         return res.redirect('/login');
     }
     //start here
-    console.log(user);
     const userId = user.dataValues.id
     const payload = {
             username: user.username,

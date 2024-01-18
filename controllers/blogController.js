@@ -1,12 +1,8 @@
 const db = require('../models')
-
-// create main Model
 const Blog = db.blogs
-// const Review = db.reviews
 
 const renderCreateNewBlog = (req,res)=>{
     const { userId } = req.params; 
-    console.log(userId)
     const cookies = req.cookies;
     res.render('blog/new',{cookies,userId});
 }
@@ -15,11 +11,11 @@ const renderCreateNewBlog = (req,res)=>{
 const createBlog = async (req, res) => {
     const { userId } = req.params;
         const newBlog = {
+        user_id: userId,
         title: req.body.blog.title,
         content: req.body.blog.content,
     }
     const blog = await Blog.create(newBlog)
-    console.log(userId)
     res.redirect(`/user/${userId}/blogs/${blog.dataValues.id}`)
 }
 
@@ -29,9 +25,6 @@ const getAllBlogs = async (req, res) => {
     const {userId} = req.params
     const cookies = req.cookies;
     const blogs = await Blog.findAll({})
-    console.log(req.cookies)
-    // console.log(blogs)
-    console.log(userId)
     res.render('blog/index',{blogs,cookies,userId})
 }
 
@@ -39,7 +32,6 @@ const getAllBlogs = async (req, res) => {
 
 const getOneBlog = async (req, res) => {
     const { userId , id } = req.params;
-    console.log(userId,id);
     const cookies = req.cookies;
     const blog = await Blog.findOne({ where: { id: id }})
     res.render('blog/show',{blog,cookies,userId})
@@ -57,7 +49,6 @@ const renderUpdateBlog = async(req,res)=>{
 const updateBlog = async (req, res) => {
     const { userId } = req.params;
     const { id } = req.params;
-    console.log(req.body.blog.title);
     const updateBlog = await Blog.update({title: req.body.blog.title,content:req.body.blog.content},
         {where: {id: id}})
     res.redirect(`/user/${userId}/blogs/${id}`);
@@ -69,7 +60,6 @@ const deleteBlog = async (req, res) => {
     const { userId } = req.params;
     const { id } = req.params;
     const result = await Blog.destroy({ where: { id: id }} );
-    console.log(result);
     res.redirect(`/user/${userId}/blogs`);
 }
 
