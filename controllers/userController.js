@@ -36,6 +36,9 @@ const login = async(req, res) => {
     if (!compareSync(req.body.password, user.password)) {
         return res.redirect('/login');
     }
+    //start here
+    console.log(user);
+    const userId = user.dataValues.id
     const payload = {
             username: user.username,
             id: user.id
@@ -45,12 +48,12 @@ const login = async(req, res) => {
         return res.cookie('savedToken',newToken,
         {httpOnly:true,
         expires: Date.now()+1000*60*60*24*7,
-        maxAge: 1000*60*60*24*7,}).redirect('/blogs');
+        maxAge: 1000*60*60*24*7,}).redirect(`/user/${userId}/blogs`);
 }
 
 const logout = (req,res)=>{
     return res.clearCookie('savedToken')
-    .redirect('/blogs')
+    .redirect('/')
 }
 
 

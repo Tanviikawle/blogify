@@ -1,8 +1,9 @@
 <% layout('layouts/boilerplate')%>
+<%- include('../partials/navbar')%>
 
 <h1>Create new blog</h1>
-
-<form action="/blogs" method="post" novalidate class="validated-form">
+<% console.log(userId) %>
+<form action="/user/<%=userId%>/blogs" method="post" novalidate class="validated-form">
     <div class="mb-3">
         <label for="blog_title" class="form-label">Blog Title:</label>
         <input type="text" class="form-control" id="blog_title" name="blog[title]" required>

@@ -22,3 +22,8 @@ CREATE TABLE Comments (
     FOREIGN KEY (user_id) REFERENCES Users(user_id), 
     FOREIGN KEY (blog_id) REFERENCES Blogs(blog_id) 
 );
+
+
+
+                <a class="nav-link" href="/users/<%=userId%>/blogs">Blogs</a>
+                <a class="nav-link" href="/users/<%=userId%>/new">Create Blog</a>

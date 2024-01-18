@@ -30,13 +30,17 @@ app.use(cookieParser());
 
 app.use(passport.initialize());
 
-app.get('/blogs', blogController.getAllBlogs)
-app.get('/new',isLoggedIn, blogController.renderCreateNewBlog)
-app.get('/blogs/:id',blogController.getOneBlog)
-app.post('/blogs',isLoggedIn,validateBlog,blogController.createBlog)
-app.get('/blogs/:id/update', blogController.renderUpdateBlog)
-app.put('/blogs/:id',isLoggedIn,validateBlog,blogController.updateBlog)
-app.delete('/blogs/:id',isLoggedIn,blogController.deleteBlog)
+app.get('/user/:userId/blogs', blogController.getAllBlogs)
+app.get('/user/:userId/new',isLoggedIn, blogController.renderCreateNewBlog)
+app.get('/user/:userId/blogs/:id',blogController.getOneBlog)
+app.post('/user/:userId/blogs',isLoggedIn,validateBlog,blogController.createBlog)
+app.get('/user/:userId/blogs/:id/update', blogController.renderUpdateBlog)
+app.put('/user/:userId/blogs/:id',isLoggedIn,validateBlog,blogController.updateBlog)
+app.delete('/user/:userId/blogs/:id',isLoggedIn,blogController.deleteBlog)
+
+app.get('/',(req,res)=>{
+    res.render('landingpage');
+})
 
 //user routes
 app.get('/login',userController.renderLogin);
