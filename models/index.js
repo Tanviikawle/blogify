@@ -36,29 +36,23 @@ db.sequelize.sync({ force: false })
 
 db.users.hasMany(db.blogs, {
     foreignKey: 'user_id',
-    // as: 'blog'
 })
 db.blogs.belongsTo(db.users, {
     foreignKey: 'user_id',
-    // as: 'user'
 })
 
 db.blogs.hasMany(db.comments, {
     foreignKey: 'blog_id',
-    // as: 'comment'
 })
 db.comments.belongsTo(db.blogs, {
     foreignKey: 'blog_id',
-    // as: 'blog'
 })
 
 db.users.hasOne(db.comments,{
     foreignKey:'user_id',
-    // as: 'comment'
 });
 db.comments.belongsTo(db.users,{
     foreignKey:'user_id',
-    // as: 'user'
 });
 
 module.exports = db
