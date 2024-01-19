@@ -30,11 +30,11 @@
                 <div class="mb-3">
                     <a href="/user/<%=userId%>/blogs/<%= blog.id %>/comment/<%=blog.comments[i].id%>/update" class="card-link btn btn-primary">Edit comment</a>
                 </div>
-                <!-- <div class="mb-3">
-                    <form class="d-inline" action="?_method=DELETE" method="POST">
+                <div class="mb-3">
+                    <form class="d-inline" action="/user/<%=userId%>/blogs/<%=blog.id%>/comment/<%= blog.comments[i].id %>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
-                </div> -->
+                </div>
             <% } %>
         <% } %>
     </div>

@@ -29,8 +29,15 @@ const updateComment = async(req,res)=>{
     res.redirect(`/user/${userId}/blogs/${id}`)
 }
 
+const deleteComment = async(req,res)=>{
+    const { userId,id,cId } = req.params;
+    const result = await Comment.destroy({ where: { id: cId }} );
+    res.redirect(`/user/${userId}/blogs/${id}`);
+}
+
 module.exports = {
     addComment,
     renderUpdate,
-    updateComment
+    updateComment,
+    deleteComment
 }
