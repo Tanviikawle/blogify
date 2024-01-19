@@ -34,13 +34,13 @@ db.sequelize.sync({ force: false })
     console.log('yes re-sync done!')
 })
 
-//one to many
 db.users.hasMany(db.blogs, {
-    foreignKey: 'id',
+    foreignKey: 'user_id',
     as: 'blog'
 })
-db.blogs.belongsTo(db.users,{
-    foreignKey: 'id',
+
+db.blogs.belongsTo(db.users, {
+    foreignKey: 'user_id',
     as: 'user'
 })
 
