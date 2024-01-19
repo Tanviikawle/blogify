@@ -38,9 +38,17 @@ db.users.hasMany(db.blogs, {
     foreignKey: 'user_id',
     as: 'blog'
 })
-
 db.blogs.belongsTo(db.users, {
     foreignKey: 'user_id',
+    as: 'user'
+})
+
+db.blogs.hasMany(db.comments, {
+    foreignKey: 'blog_id',
+    as: 'blog'
+})
+db.comments.belongsTo(db.blogs, {
+    foreignKey: 'blog_id',
     as: 'user'
 })
 

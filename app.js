@@ -8,6 +8,7 @@ const { validateBlog,isLoggedIn }= require('./middleware');
 const ExpressError = require('./utils/ExpressError');
 const passport = require('passport');
 const cookieParser = require('cookie-parser')
+const commentController = require('./controllers/commentController');
 
 const db = require('./models')
 const User = db.users;
@@ -37,6 +38,8 @@ app.post('/user/:userId/blogs',isLoggedIn,validateBlog,blogController.createBlog
 app.get('/user/:userId/blogs/:id/update', blogController.renderUpdateBlog)
 app.put('/user/:userId/blogs/:id',isLoggedIn,validateBlog,blogController.updateBlog)
 app.delete('/user/:userId/blogs/:id',isLoggedIn,blogController.deleteBlog)
+
+app.post('/user/:userId/blogs/:id/comment',isLoggedIn,commentController.addComment);
 
 app.get('/',(req,res)=>{
     res.render('landingpage');

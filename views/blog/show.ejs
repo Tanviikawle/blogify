@@ -21,3 +21,18 @@
     <% } %>
 </div>
 
+<div class="container-md "  style="width: 80vh;">
+    <h3>Leave a comment</h3>
+    <div class="container-md">
+        <form action="/user/<%=userId%>/blogs/<%=blog.id%>/comment" method="post" class="validated-form" novalidate>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="comment" name="comment" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <button class="btn btn-success btn-block">Submit</button>
+        </form>
+    </div>
+</div>
+
