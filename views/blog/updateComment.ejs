@@ -1,0 +1,17 @@
+<% layout('layouts/boilerplate')%>
+<%- include('../partials/navbar')%>
+
+<h1>Edit your comment</h1>
+<%console.log(comment) %>
+<form action="/user/<%=userId%>/blogs/<%=blog.id%>/comment/<%= comment.dataValues.id %>?_method=PUT" method="post" novalidate class="validated-form">
+    <div class="mb-3">
+        <!-- <label for="comment" class="form-label">Blog Title:</label> -->
+        <input type="text" class="form-control" id="comment" name="comment" value="<%= comment.dataValues.body %>" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Update Comment</button>
+      </div>
+</form>

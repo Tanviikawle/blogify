@@ -37,7 +37,7 @@ const getOneBlog = async (req, res) => {
     const blog = await Blog.findOne({ 
         include: [{
             model: Comment,
-            attributes: ['body']
+            attributes: ['id','body','user_id','blog_id']
         }],
         where: { id: id }})
         console.log(JSON.stringify(blog))

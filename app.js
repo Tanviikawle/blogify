@@ -40,6 +40,8 @@ app.put('/user/:userId/blogs/:id',isLoggedIn,validateBlog,blogController.updateB
 app.delete('/user/:userId/blogs/:id',isLoggedIn,blogController.deleteBlog)
 
 app.post('/user/:userId/blogs/:id/comment',isLoggedIn,commentController.addComment);
+app.get('/user/:userId/blogs/:id/comment/:cId/update', commentController.renderUpdate)
+app.put('/user/:userId/blogs/:id/comment/:cId',isLoggedIn,commentController.updateComment)
 
 app.get('/',(req,res)=>{
     res.render('landingpage');

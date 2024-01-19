@@ -26,6 +26,16 @@
     <div class="container-md">
         <% for (let i in blog.comments){ %>
             <p><%= blog.comments[i].body %></p>
+            <% if (blog.comments[i].user_id == userId){ %>
+                <div class="mb-3">
+                    <a href="/user/<%=userId%>/blogs/<%= blog.id %>/comment/<%=blog.comments[i].id%>/update" class="card-link btn btn-primary">Edit comment</a>
+                </div>
+                <!-- <div class="mb-3">
+                    <form class="d-inline" action="?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div> -->
+            <% } %>
         <% } %>
     </div>
 </div>
