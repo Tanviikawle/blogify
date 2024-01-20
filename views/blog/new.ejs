@@ -1,24 +1,28 @@
 <% layout('layouts/boilerplate')%>
 <%- include('../partials/navbar')%>
 
-<h1>Create new blog</h1>
-<% console.log(userId) %>
-<form action="/user/<%=userId%>/blogs" method="post" novalidate class="validated-form">
-    <div class="mb-3">
-        <label for="blog_title" class="form-label">Blog Title:</label>
-        <input type="text" class="form-control" id="blog_title" name="blog[title]" required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="blog_content" class="form-label">Type your blog here: </label>
-        <textarea class="form-control" id="blog_content" rows="5" name="blog[content]" required></textarea>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-      <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Create Blog</button>
-      </div>
-</form>
+<div class="container-md show">
+    <div class="addMargin">
+      <h1>Create New Blog</h1>
+    </div>
+    <form action="/user/<%=userId%>/blogs" method="post" novalidate class="validated-form">
+        <div class="mb-3">
+            <label for="blog_title" class="form-label">Blog Title:</label>
+            <input type="text" class="form-control" id="blog_title" name="blog[title]" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="blog_content" class="form-label">Type your blog here: </label>
+            <textarea class="form-control" id="blog_content" rows="5" name="blog[content]" required></textarea>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Create Blog</button>
+          </div>
+    </form>
+</div>
+

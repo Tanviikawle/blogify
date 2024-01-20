@@ -1,14 +1,15 @@
 <% layout('layouts/boilerplate')%>
 <%- include('../partials/navbar')%>
 
-<div class="container-md" style="width: 100vh;">
+<div class="container-md show">
     <div class="mb-3">
-        <h1> Index page </h1>
+        <h1> All Blogs </h1>
     </div>
     <% for (let blog in blogs){ %>
     <div class="card mb-3">
         <div class="card-body">
-            <h5 class="card-title"><%= blogs[blog].dataValues.title %></h5>
+            <h3 class="card-title"><%= blogs[blog].dataValues.title %></h3>
+            <!-- add author name instead -->
             <p class="card-text"><%= blogs[blog].dataValues.content %></p>
             <a href="/user/<%= userId %>/blogs/<%= blogs[blog].dataValues.id %>" class="btn btn-primary">View <%= blogs[blog].dataValues.title %></a>
           </div>

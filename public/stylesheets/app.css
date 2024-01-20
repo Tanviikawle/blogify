@@ -1,0 +1,34 @@
+.show {
+    margin-top: 10px;
+    width: 50%;
+}
+
+.userForm{
+    width: 80vh;
+}
+
+.addMargin{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    text-align: center;
+}
+
+.centerVertically{
+    height: 100%;
+    margin: 0 auto;
+}
+
+.centerButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center{
+    text-align: center;
+}
+
+.commentCard{
+    width: 80vh;
+    margin: 0 auto;
+}

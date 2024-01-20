@@ -1,6 +1,8 @@
 <% layout('layouts/boilerplate') %>
-<div class="container-md "  style="width: 80vh;">
-    <h1>Register</h1>
+<div class="container-md show userForm" >
+    <div class="addMargin">
+        <h1>Register</h1>
+    </div>
     <div class="container-md">
         <form action="/register" method="post" class="validated-form" novalidate>
             <div class="mb-3">
@@ -24,8 +26,12 @@
                     Looks good!
                 </div>
             </div>
-            <button class="btn btn-success">Register</button>
-            <a href="/login">login</a>
+            <div class="mb-3 centerButton">
+                <button class="btn btn-success">Register</button>
+            </div>
+            <div class="mb-3 center">
+                <p>Already a user? Log in to continue:  <a href="/login">login page</a></p>
+            </div>
         </form>
     </div>
 </div>

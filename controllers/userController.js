@@ -23,7 +23,17 @@ const register =  async(req, res) => {
         password: hashSync(req.body.password, 10)
     }
     const user = await User.create(newUser)
-    res.redirect(`/login`);
+    const userId = user.dataValues.id
+    const payload = {
+            username: user.username,
+            id: user.id
+        }
+        const token = jwt.sign(payload, "Random string", { expiresIn: "1d" })
+        const newToken = 'Bearer ' + token;
+        return res.cookie('savedToken',newToken,
+        {httpOnly:true,
+        expires: Date.now()+1000*60*60*24*7,
+        maxAge: 1000*60*60*24*7,}).redirect(`/user/${userId}/blogs`);
 }
 
 const login = async(req, res) => {
@@ -36,7 +46,7 @@ const login = async(req, res) => {
     if (!compareSync(req.body.password, user.password)) {
         return res.redirect('/login');
     }
-    //start here
+    
     const userId = user.dataValues.id
     const payload = {
             username: user.username,

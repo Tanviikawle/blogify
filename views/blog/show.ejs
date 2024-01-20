@@ -1,57 +1,58 @@
 <% layout('layouts/boilerplate')%>
 <%- include('../partials/navbar')%>
 
-<div class="container-md" style="width: 100vh;">
-    <!-- <%console.log(blog)%> -->
-    <div class="mb-3">
+<div class="container-md show" style="width: 120vh;">
+    <div class="mb-3 addMargin" style="text-align: left;">
         <h1> <%= blog.dataValues.title %></h1>
     </div>
-    <div class="container-md">
+    <div class="container-md mb-3">
         <p><%= blog.dataValues.content %></p>
     </div>
     <% if(blog.dataValues.user_id==userId){ %>
-    <div class="mb-3">
+    <div class="mb-5">
         <a href="/user/<%=userId%>/blogs/<%= blog.id %>/update" class="card-link btn btn-primary">Edit blog</a>
-    </div>
-    <div class="mb-3">
         <form class="d-inline" action="/user/<%=userId%>/blogs/<%=blog.id%>?_method=DELETE" method="POST">
             <button class="btn btn-danger">Delete</button>
         </form>
     </div>
     <% } %>
-</div>
-
-<div class="container-md">
-    <h3>Comments</h3>
-    <div class="container-md">
-        <% for (let i in blog.comments){ %>
-            <p><%= blog.comments[i].body %></p>
-            <% if (blog.comments[i].user_id == userId){ %>
+    <div class="container-md "  style="width: 80vh;">
+        <h3>Leave a comment</h3>
+        <div class="container-md">
+            <form action="/user/<%=userId%>/blogs/<%=blog.id%>/comment" method="post" class="validated-form" novalidate>
                 <div class="mb-3">
-                    <a href="/user/<%=userId%>/blogs/<%= blog.id %>/comment/<%=blog.comments[i].id%>/update" class="card-link btn btn-primary">Edit comment</a>
+                    <input type="text" class="form-control" id="comment" name="comment" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <form class="d-inline" action="/user/<%=userId%>/blogs/<%=blog.id%>/comment/<%= blog.comments[i].id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            <% } %>
-        <% } %>
+                <button class="btn btn-success btn-block">Submit</button>
+            </form>
+        </div>
     </div>
-</div>
-
-<div class="container-md "  style="width: 80vh;">
-    <h3>Leave a comment</h3>
-    <div class="container-md">
-        <form action="/user/<%=userId%>/blogs/<%=blog.id%>/comment" method="post" class="validated-form" novalidate>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="comment" name="comment" required>
-                <div class="valid-feedback">
-                    Looks good!
+    <div class="mb-2"><hr></div>
+    <div class="container mb-3">
+        <div class="mb-3 center" >
+            <h3>Comments</h3>
+        </div>
+            <% for (let i in blog.comments){ %>
+            <div class="card commentCard mb-1">
+                <div class="card-body">
+                    <p><%= blog.comments[i].body %></p>
+                    <% if (blog.comments[i].user_id == userId){ %>
+                        <div class="mb-3">
+                            <a href="/user/<%=userId%>/blogs/<%= blog.id %>/comment/<%=blog.comments[i].id%>/update" class="card-link btn btn-sm btn-primary">Edit</a>
+                            <form class="d-inline" action="/user/<%=userId%>/blogs/<%=blog.id%>/comment/<%= blog.comments[i].id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    <% } %>
                 </div>
             </div>
-            <button class="btn btn-success btn-block">Submit</button>
-        </form>
+            <% } %>
+        </div>
     </div>
 </div>
+
+
 

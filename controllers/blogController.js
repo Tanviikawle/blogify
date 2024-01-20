@@ -70,19 +70,6 @@ const deleteBlog = async (req, res) => {
     res.redirect(`/user/${userId}/blogs`);
 }
 
-// 7. connect one to many relation Product and Reviews
-// const getBlogComments =  async (req, res) => {
-//     const { id }= req.params
-//     const data = await Blog.findOne({
-//         include: [{
-//             model: Comment,
-//             as: 'comment'
-//         }],
-//         where: { id: id }
-//     })
-//     res.status(200).send(data)
-// }
-
 module.exports = {
     renderCreateNewBlog,
     createBlog,
