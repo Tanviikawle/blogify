@@ -4,6 +4,7 @@
 <div class="container-md show" style="width: 120vh;">
     <div class="mb-3 addMargin" style="text-align: left;">
         <h1> <%= blog.dataValues.title %></h1>
+        <p><i>- By <%= blog.user.username %></i></p>
     </div>
     <div class="container-md mb-3">
         <p><%= blog.dataValues.content %></p>

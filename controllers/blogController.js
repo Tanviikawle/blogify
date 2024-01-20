@@ -1,6 +1,7 @@
 const db = require('../models')
 const Blog = db.blogs
 const Comment = db.comments
+const User = db.users
 
 const renderCreateNewBlog = (req,res)=>{
     const { userId } = req.params; 
@@ -25,7 +26,13 @@ const createBlog = async (req, res) => {
 const getAllBlogs = async (req, res) => {
     const {userId} = req.params
     const cookies = req.cookies;
-    const blogs = await Blog.findAll({})
+    const blogs = await Blog.findAll({
+        include: [
+        {
+            model: User,
+            attributes: ['username']   
+        }]
+    })
     res.render('blog/index',{blogs,cookies,userId})
 }
 
@@ -38,6 +45,10 @@ const getOneBlog = async (req, res) => {
         include: [{
             model: Comment,
             attributes: ['id','body','user_id','blog_id']
+        },
+        {
+            model: User,
+            attributes: ['username']   
         }],
         where: { id: id }})
         console.log(JSON.stringify(blog))

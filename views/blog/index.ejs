@@ -9,8 +9,9 @@
     <div class="card mb-3">
         <div class="card-body">
             <h3 class="card-title"><%= blogs[blog].dataValues.title %></h3>
+            <p class="card-title"><i>Author: <%= blogs[blog].dataValues.user.username %></i></p>
             <!-- add author name instead -->
-            <p class="card-text"><%= blogs[blog].dataValues.content %></p>
+            <!-- <p class="card-text"><%= blogs[blog].dataValues.content %></p> -->
             <a href="/user/<%= userId %>/blogs/<%= blogs[blog].dataValues.id %>" class="btn btn-primary">View <%= blogs[blog].dataValues.title %></a>
           </div>
     </div>
